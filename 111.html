@@ -26,7 +26,15 @@ tr:nth-child(even) {background-color: #f2f2f2}
 <th>Place</th>
 </tr>
 <?php
-$conn = mysqli_connect("localhost", "root", "", "3621393258lL+");
+$host = 'localhost';
+$db = 'mydb';
+$user = 'root';
+$pass = '3621393258lL+';
+$charset = 'utf8mb4';
+
+$conn = "mysql:host=$host;dbname=$db;charset=$charset";
+
+
 // Check connection
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
@@ -36,8 +44,8 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 // output data of each row
 while($row = $result->fetch_assoc()) {
-echo "<tr><td>" . $row["id"]. "</td><td>" . $row["username"] . "</td><td>"
-. $row["password"]. "</td></tr>";
+echo "<tr><td>" . $row["Event"]. "</td><td>" . $row["Time"] . "</td><td>"
+. $row["Place"]. "</td></tr>";
 }
 echo "</table>";
 } else { echo "0 results"; }
