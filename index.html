@@ -22,7 +22,7 @@
 
     $.ajax({
         type: "GET",
-        url: "https://zkfil.github.io/plan/111.csv",
+        url: "https:\\zkfil.github.io\plan\111.csv",
         success: function (data) {
             $('body').append(arrayToTable(Papa.parse(data).data));
         }
