@@ -1,12 +1,32 @@
-/* connect to the db */
-$connection = mysql_connect('localhost','root','3621393258lL+');
-mysql_select_db('mydb',$connection);
-
-/* show tables */
-$result = mysql_query('SHOW TABLE yevent_2022',$connection) or die('cannot show tables');
-while($tableName = mysql_fetch_row($result)) {
-
-
+<!DOCTYPE html>
+<html>
+<head>
+<title>Table with database</title>
+<style>
+table {
+border-collapse: collapse;
+width: 100%;
+color: #588c7e;
+font-family: monospace;
+font-size: 25px;
+text-align: left;
+}
+th {
+background-color: #588c7e;
+color: white;
+}
+tr:nth-child(even) {background-color: #f2f2f2}
+</style>
+</head>
+<body>
+<table>
+<tr>
+<th>Id</th>
+<th>Username</th>
+<th>Password</th>
+</tr>
+<?php
+$conn = mysqli_connect("localhost", "root", "", "3621393258lL+");
 // Check connection
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
@@ -22,3 +42,7 @@ echo "<tr><td>" . $row["id"]. "</td><td>" . $row["username"] . "</td><td>"
 echo "</table>";
 } else { echo "0 results"; }
 $conn->close();
+?>
+</table>
+</body>
+</html>
