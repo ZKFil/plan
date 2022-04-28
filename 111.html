@@ -6,20 +6,19 @@ mysql_select_db('mydb',$connection);
 $result = mysql_query('SHOW TABLE yevent_2022',$connection) or die('cannot show tables');
 while($tableName = mysql_fetch_row($result)) {
 
-	$table = $tableName[0];
 
-	echo '<h3>',$table,'</h3>';
-	$result2 = mysql_query('SHOW COLUMNS FROM '.$table) or die('cannot show columns from '.$table);
-	if(mysql_num_rows($result2)) {
-		echo '<table cellpadding="0" cellspacing="0" class="db-table">';
-		echo '<tr><th>Event</th><th>Time</th></tr>';
-		while($row2 = mysql_fetch_row($result2)) {
-			echo '<tr>';
-			foreach($row2 as $key=>$value) {
-				echo '<td>',$value,'</td>';
-			}
-			echo '</tr>';
-		}
-		echo '</table><br />';
-	}
+// Check connection
+if ($conn->connect_error) {
+die("Connection failed: " . $conn->connect_error);
 }
+$sql = "SELECT id, username, password FROM login";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+// output data of each row
+while($row = $result->fetch_assoc()) {
+echo "<tr><td>" . $row["id"]. "</td><td>" . $row["username"] . "</td><td>"
+. $row["password"]. "</td></tr>";
+}
+echo "</table>";
+} else { echo "0 results"; }
+$conn->close();
