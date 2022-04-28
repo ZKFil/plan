@@ -21,9 +21,9 @@ tr:nth-child(even) {background-color: #f2f2f2}
 <body>
 <table>
 <tr>
-<th>Id</th>
-<th>Username</th>
-<th>Password</th>
+<th>Event</th>
+<th>Time</th>
+<th>Place</th>
 </tr>
 <?php
 $conn = mysqli_connect("localhost", "root", "", "3621393258lL+");
@@ -31,7 +31,7 @@ $conn = mysqli_connect("localhost", "root", "", "3621393258lL+");
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT id, username, password FROM login";
+$sql = "SELECT Event, Time, Place FROM yevent_2022";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 // output data of each row
