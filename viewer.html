@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title></title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">-->
         <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css">-->
         <style type="text/css">
             #main {
@@ -44,7 +44,7 @@
         <div id="main" class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="loading" class="alert alert-info lead text-center">Loading csv file ...</div>
+                    <div id="loading" class="alert alert-info lead text-center">Загрузка плана ...</div>
                     <div id="error" class="alert alert-danger lead text-center hidden"></div>
                     <table id="csv-table" class="table table-bordered table-striped table-condensed"></table>
                 </div>
@@ -60,7 +60,7 @@
                 var showError = function(message) {
                     hideLoading();
                     if(!message || typeof message !== 'string' || !message instanceof String) {
-                        message = "Une erreur est survenue";
+                        message = "Произошла обшибка!";
                     }
                     $('#error').removeClass('hidden');
                     $('#error').html(message);
@@ -79,13 +79,13 @@
                 }
 
                 if(!uriCsvFile) {
-                    showError("CSV File not specified or not found");
+                    showError("Таблица не была найдена");
                     return;
                 }
 
                 document.title = uriCsvFile;
 
-                $('#loading').html("Loading csv file : " + uriCsvFile);
+                $('#loading').html("Загрузка таблицы : " + uriCsvFile);
 
                 var data = Papa.parse(uriCsvFile, {
                     download: true,
@@ -99,7 +99,7 @@
                     {
                         console.log("loaded");
                         if(data.errors.length > 0) {
-                            showError("File contains error, is maybe not a csv file");
+                            showError("Файл содержит ошибку, возможно, это не файл csv");
                             return;
                         }
                         var columns = [];
