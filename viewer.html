@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title></title>
 
-        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css">-->
         <style type="text/css">
             #main {
               padding-top: 15px;
@@ -59,7 +60,7 @@
                 var showError = function(message) {
                     hideLoading();
                     if(!message || typeof message !== 'string' || !message instanceof String) {
-                        message = "Ошибка подключения";
+                        message = "Une erreur est survenue";
                     }
                     $('#error').removeClass('hidden');
                     $('#error').html(message);
@@ -69,7 +70,7 @@
                    $('#loading').hide();
                 }
 
-                ///var uriCsvFile = window.location.hash.replace("#", "");///
+                var uriCsvFile = window.location.hash.replace("#", "");
                 if(!uriCsvFile) {
                     uriCsvFile = window.location.pathname.replace(/.*\/(.+.csv).html$/, '$1');
                     if(window.location.pathname == uriCsvFile) {
@@ -78,7 +79,7 @@
                 }
 
                 if(!uriCsvFile) {
-                    showError("Таблица не найдена");
+                    showError("CSV File not specified or not found");
                     return;
                 }
 
@@ -119,28 +120,28 @@
                             language: {
                                 "info": "_START_ to _END_ (_TOTAL_ lines)",
                             },
-                            ///initComplete: function() {
-                            ///    hideLoading();
-                            ///    $('#csv-table_wrapper').addClass('panel panel-default');
-                            ///    $('#csv-table_wrapper').prepend('<div class="panel-heading"></div>');
-                            ///    $('#csv-table_wrapper .panel-heading').append($('#csv-table_wrapper #csv-table_length').detach());
-                            ///    $('#csv-table_wrapper .panel-heading').append($('#csv-table_wrapper #csv-table_filter').detach());
-                            ///    $('#csv-table_wrapper .panel-heading').append("<div class='col-sm-3 col-md-3 text-right text-muted dataTables_title'><a href='"+uriCsvFile+"' target='_blank'>"+uriCsvFile+"</a></div>");
-                            ///    $('#csv-table_wrapper .panel-heading').append("<div class='clearfix'></div>");
-                             ///   $('#csv-table_length').addClass('form-group row col-sm-3 col-md-1');
-                             ///   $('#csv-table_length').html($('<div class="col-xs-12 row"></div>').append($('#csv-table_length select').detach()));
-                             ///   $('#csv-table_length select').addClass('form-control input-sm');
-                             ///   $('#csv-table_filter').addClass('form-group row col-sm-6 col-md-8');
-                              ///  $('#csv-table_filter').html($('<div class="col-xs-12 row"></div>').append($('#csv-table_filter input').detach()));
-                             ///   $('#csv-table_filter input').addClass('form-control input-sm');
-                             ///   $('#csv-table_filter input').attr('placeholder', 'Rechercher ...');
-                             ///   $('#csv-table_wrapper').append('<div class="panel-footer"></div>');
-                             ///   $('#csv-table_wrapper .panel-footer').append($('#csv-table_wrapper #csv-table_info').detach());
-                              ///  $('#csv-table_wrapper .panel-footer').append($('#csv-table_wrapper #csv-table_paginate').detach());
-                              ///  $('#csv-table_wrapper .panel-footer').append("<div class='clearfix'></div>");
-                              ///  $('#csv-table_info').addClass('row col-xs-5 text-muted');
-                             ///   $('#csv-table_paginate').addClass('row col-xs-7');
-                          ///  },
+                            initComplete: function() {
+                                hideLoading();
+                                $('#csv-table_wrapper').addClass('panel panel-default');
+                                $('#csv-table_wrapper').prepend('<div class="panel-heading"></div>');
+                                $('#csv-table_wrapper .panel-heading').append($('#csv-table_wrapper #csv-table_length').detach());
+                                $('#csv-table_wrapper .panel-heading').append($('#csv-table_wrapper #csv-table_filter').detach());
+                                $('#csv-table_wrapper .panel-heading').append("<div class='col-sm-3 col-md-3 text-right text-muted dataTables_title'><a href='"+uriCsvFile+"' target='_blank'>"+uriCsvFile+"</a></div>");
+                                $('#csv-table_wrapper .panel-heading').append("<div class='clearfix'></div>");
+                                $('#csv-table_length').addClass('form-group row col-sm-3 col-md-1');
+                                $('#csv-table_length').html($('<div class="col-xs-12 row"></div>').append($('#csv-table_length select').detach()));
+                                $('#csv-table_length select').addClass('form-control input-sm');
+                                $('#csv-table_filter').addClass('form-group row col-sm-6 col-md-8');
+                                $('#csv-table_filter').html($('<div class="col-xs-12 row"></div>').append($('#csv-table_filter input').detach()));
+                                $('#csv-table_filter input').addClass('form-control input-sm');
+                                $('#csv-table_filter input').attr('placeholder', 'Rechercher ...');
+                                $('#csv-table_wrapper').append('<div class="panel-footer"></div>');
+                                $('#csv-table_wrapper .panel-footer').append($('#csv-table_wrapper #csv-table_info').detach());
+                                $('#csv-table_wrapper .panel-footer').append($('#csv-table_wrapper #csv-table_paginate').detach());
+                                $('#csv-table_wrapper .panel-footer').append("<div class='clearfix'></div>");
+                                $('#csv-table_info').addClass('row col-xs-5 text-muted');
+                                $('#csv-table_paginate').addClass('row col-xs-7');
+                            },
                             drawCallback: function() {
                               $('#csv-table_paginate a').addClass('btn btn-default');
                               $('#csv-table_paginate a.current').addClass('btn-primary');
