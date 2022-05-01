@@ -59,7 +59,7 @@
                 var showError = function(message) {
                     hideLoading();
                     if(!message || typeof message !== 'string' || !message instanceof String) {
-                        message = "Une erreur est survenue";
+                        message = "Ошибка подключения таблицы";
                     }
                     $('#error').removeClass('hidden');
                     $('#error').html(message);
@@ -69,7 +69,7 @@
                    $('#loading').hide();
                 }
 
-                var uriCsvFile = window.location.hash.replace("#", "");
+                ///var uriCsvFile = window.location.hash.replace("#", "");///
                 if(!uriCsvFile) {
                     uriCsvFile = window.location.pathname.replace(/.*\/(.+.csv).html$/, '$1');
                     if(window.location.pathname == uriCsvFile) {
