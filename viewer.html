@@ -12,22 +12,22 @@
             #main {
               padding-top: 15px;
             }
-            #csv-table_wrapper table.table-bordered  
-                border: none;
+            #csv-table_wrapper table.table-bordered {  
+                border: 2pt;
                 margin-top: 0 !important;
             }
 
-           div.dataTables_wrapper div.dataTables_length select {
+            div.dataTables_wrapper div.dataTables_length select {
               width: inherit;
               display: inherit;
             }
 
-           div.dataTables_wrapper div.dataTables_filter input {
+            div.dataTables_wrapper div.dataTables_filter input {
               width: inherit;
               display: inherit;
             }
 
-           .dataTables_wrapper .form-group {
+            .dataTables_wrapper .form-group {
                 margin-bottom: 0;
             }
 
@@ -38,15 +38,24 @@
             .dataTables_paginate a {
                 margin: 0 2px;
             }
+	    .panel-footer {
+    		display: none;
+	     }
+		a {
+    			font-size: 14pt;
+    			color: black;
+			}
         </style>
     </head>
     <body>
         <div id="main" class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="loading" class="alert alert-info lead text-center">Загрузка плана ...</div>
+		
+                    <div id="loading" class="alert alert-info lead text-center">Загрузка файла таблицы ...</div>
                     <div id="error" class="alert alert-danger lead text-center hidden"></div>
-                    <table id="csv-table" class="table table-bordered table-striped table-condensed"></table>
+		    <table id="csv-table" class="table table-bordered table-striped table-condensed"></table>
+		
                 </div>
             </div>
         </div>
@@ -60,7 +69,7 @@
                 var showError = function(message) {
                     hideLoading();
                     if(!message || typeof message !== 'string' || !message instanceof String) {
-                        message = "Произошла обшибка!";
+                        message = "Ошибка загрузки";
                     }
                     $('#error').removeClass('hidden');
                     $('#error').html(message);
@@ -79,13 +88,13 @@
                 }
 
                 if(!uriCsvFile) {
-                    showError("Таблица не была найдена");
+                    showError("Файл таблицы не найден");
                     return;
                 }
 
                 document.title = uriCsvFile;
 
-                $('#loading').html("Загрузка таблицы : " + uriCsvFile);
+                $('#loading').html("Загрузка файла таблицы : " + uriCsvFile);
 
                 var data = Papa.parse(uriCsvFile, {
                     download: true,
@@ -97,9 +106,9 @@
                     },
                     complete: function(data)
                     {
-                        console.log("loaded");
+                        console.log("Загружен");
                         if(data.errors.length > 0) {
-                            showError("Файл содержит ошибку, возможно, это не файл csv");
+                            showError("Ошибка файла или кодировки, возможно файл имеет другой формат вместо csv");
                             return;
                         }
                         var columns = [];
@@ -112,11 +121,13 @@
                             columns: columns,
                             scrollY: true,
                             scrollX: true,
-                            scrollCollapse: true,
-                            searching: true,
+                            scrollCollapse: false,
+                            searching: false,
                             paging: true,
-                            ordering: true,
+                            ordering: false,
+			    showFilter: false,
                             lengthMenu: [[250, 500, 1000], [250, 500, 1000]],
+			   
                             language: {
                                 "info": "_START_ to _END_ (_TOTAL_ lines)",
                             },
@@ -129,7 +140,7 @@
                                 $('#csv-table_wrapper .panel-heading').append("<div class='col-sm-3 col-md-3 text-right text-muted dataTables_title'><a href='"+uriCsvFile+"' target='_blank'>"+uriCsvFile+"</a></div>");
                                 $('#csv-table_wrapper .panel-heading').append("<div class='clearfix'></div>");
                                 $('#csv-table_length').addClass('form-group row col-sm-3 col-md-1');
-                                $('#csv-table_length').html($('<div class="col-xs-12 row"></div>').append($('#csv-table_length select').detach()));
+                                $('#csv-table_length').html($('').append($('#csv-table_length select').detach()));
                                 $('#csv-table_length select').addClass('form-control input-sm');
                                 $('#csv-table_filter').addClass('form-group row col-sm-6 col-md-8');
                                 $('#csv-table_filter').html($('<div class="col-xs-12 row"></div>').append($('#csv-table_filter input').detach()));
